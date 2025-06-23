@@ -2,14 +2,14 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Отчёт анализа логов</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Отчёт анализа - LogScan</title>
+    <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <h1>Результаты анализа 📋</h1>
+        <h1>📋 Отчёт анализа логов</h1>
         <pre>{{ report }}</pre>
-        <a href="{{ url_for('index') }}">Назад</a>
+        <a href="{{ url_for('index') }}">🔙 Вернуться назад</a>
     </div>
 </body>
 </html>

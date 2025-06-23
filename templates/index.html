@@ -2,15 +2,15 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>LogScan - Анализатор логов</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>LogScan Analyzer</title>
+    <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <h1>LogScan 🔍</h1>
+        <h1>🛡️ LogScan Analyzer</h1>
         <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
             <input type="file" name="logfile" required>
-            <button type="submit">Анализировать лог</button>
+            <button type="submit">Запустить анализ</button>
         </form>
     </div>
 </body>
