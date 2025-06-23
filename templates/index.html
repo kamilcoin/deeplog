@@ -1,11 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
   <meta charset="UTF-8">
   <title>🔎DeepLog — Log Analyzr</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
+  <nav class="cyber-navbar">
+    <div class="nav-left">
+      <a href="https://github.com/kamilcoin" target="_blank" title="kamilcoin">
+        <img src="https://avatars.githubusercontent.com/u/11111111?v=4" alt="kamilcoin" class="nav-avatar">
+      </a>
+      <a href="https://github.com/RichardAlmeyda" target="_blank" title="RichardAlmeyda">
+        <img src="https://avatars.githubusercontent.com/u/12222222?v=4" alt="RichardAlmeyda" class="nav-avatar">
+      </a>
+    </div>
+    <div class="nav-right">
+      <button class="cyber-btn" onclick="showDonationModal()">Donation</button>
+    </div>
+  </nav>
+  <div id="cyber-modal" class="cyber-modal">
+    <div class="cyber-modal-content">
+      <span class="cyber-modal-close" onclick="closeModal()">&times;</span>
+      <div style="margin-bottom:18px;">
+        <div style="margin-bottom:12px;">
+          <strong>BTC:</strong>
+          <span id="btc-address" style="user-select:all;">1AbHQdVVLzAGQv153UnJmvKsmWdX6sEfjk</span>
+          <button class="cyber-btn small" onclick="copyDonation('btc-address','btc-copy')">Copy</button>
+          <span id="btc-copy" class="copyMsg">Copied!</span>
+        </div>
+        <div>
+          <strong>USDT TRC20:</strong>
+          <span id="trc-address" style="user-select:all;">TTttSQ274h6bEAbtS2mbLNQVg3K3HiSU6y</span>
+          <button class="cyber-btn small" onclick="copyDonation('trc-address','trc-copy')">Copy</button>
+          <span id="trc-copy" class="copyMsg">Copied!</span>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="container">
     <h1>🔎DeepLog</h1>
     <p style="opacity:0.85; font-size:14px;">Upload your server logs to detect anomalies, threats, and security issues in real time.</p>
@@ -95,6 +128,35 @@
 
     xhr.send(formData);
   });
+
+  function showModal(text) {
+  document.getElementById('cyber-modal-text').textContent = text;
+  document.getElementById('cyber-modal').style.display = 'flex';
+  document.getElementById('copyMsg').style.display = 'none';
+}
+function closeModal() {
+  document.getElementById('cyber-modal').style.display = 'none';
+}
+function copyModalText() {
+  const text = document.getElementById('cyber-modal-text').textContent;
+  navigator.clipboard.writeText(text);
+  document.getElementById('copyMsg').style.display = 'inline';
+}
+function showDonationModal() {
+  document.getElementById('cyber-modal').style.display = 'flex';
+  document.getElementById('btc-copy').style.display = 'none';
+  document.getElementById('trc-copy').style.display = 'none';
+}
+function copyDonation(addrId, msgId) {
+  const text = document.getElementById(addrId).textContent;
+  navigator.clipboard.writeText(text);
+  document.getElementById(msgId).style.display = 'inline';
+  setTimeout(() => { document.getElementById(msgId).style.display = 'none'; }, 1200);
+}
+window.onclick = function(event) {
+  const modal = document.getElementById('cyber-modal');
+  if (event.target === modal) closeModal();
+}
   </script>
 </body>
 </html>
