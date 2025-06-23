@@ -1,0 +1,11 @@
+🔎 Log levels:
+- INFO: 3
+- WARNING: 1
+- ERROR: 1
+
+🚨 Errors and Warnings:
+- [2025-06-23 18:41:47+00:00] PotentialVulnFound: Possible SQL Injection detected.
+- [2025-06-23 18:43:02+00:00] UploadFailed: Failed to upload report to cloud storage. Check connection.
+
+🛡️ Potential Vulnerabilities:
+- SQL Injection on http://testsite.local/login.php: Possible SQL Injection detected.
