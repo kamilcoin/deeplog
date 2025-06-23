@@ -16,10 +16,18 @@
         <img src="https://avatars.githubusercontent.com/u/12222222?v=4" alt="RichardAlmeyda" class="nav-avatar">
       </a>
     </div>
-    <div class="nav-right">
-      <button class="cyber-btn" onclick="showDonationModal()">Donation</button>
-    </div>
   </nav>
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class="flash-messages">
+        {% for message in messages %}
+          <div class="flash-message">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
   <div class="container">
     <h1>🔎DeepLog</h1>
     <p style="opacity:0.85; font-size:14px;">Upload your server logs to detect anomalies, threats, and security issues in real time.</p>
@@ -109,35 +117,6 @@
 
     xhr.send(formData);
   });
-
-  function showModal(text) {
-  document.getElementById('cyber-modal-text').textContent = text;
-  document.getElementById('cyber-modal').style.display = 'flex';
-  document.getElementById('copyMsg').style.display = 'none';
-}
-function closeModal() {
-  document.getElementById('cyber-modal').style.display = 'none';
-}
-function copyModalText() {
-  const text = document.getElementById('cyber-modal-text').textContent;
-  navigator.clipboard.writeText(text);
-  document.getElementById('copyMsg').style.display = 'inline';
-}
-function showDonationModal() {
-  document.getElementById('cyber-modal').style.display = 'flex';
-  document.getElementById('btc-copy').style.display = 'none';
-  document.getElementById('trc-copy').style.display = 'none';
-}
-function copyDonation(addrId, msgId) {
-  const text = document.getElementById(addrId).textContent;
-  navigator.clipboard.writeText(text);
-  document.getElementById(msgId).style.display = 'inline';
-  setTimeout(() => { document.getElementById(msgId).style.display = 'none'; }, 1200);
-}
-window.onclick = function(event) {
-  const modal = document.getElementById('cyber-modal');
-  if (event.target === modal) closeModal();
-}
   </script>
 </body>
 </html>

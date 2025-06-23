@@ -341,3 +341,27 @@ a:hover {
 .copyMsg {
     display: none !important;
 }
+
+.flash-messages {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+    margin-bottom: -60px;
+    z-index: 200;
+    position: relative;
+}
+
+.flash-message {
+    background: #1e293b;
+    color: #ff4d4f;
+    border: 1.5px solid #ff4d4f;
+    border-radius: 8px;
+    padding: 14px 28px;
+    font-size: 1.08rem;
+    font-weight: 700;
+    box-shadow: 0 2px 12px #ff4d4f33;
+    margin: 0 8px;
+    letter-spacing: 0.5px;
+    animation: fadeInBody 0.6s;
+}
