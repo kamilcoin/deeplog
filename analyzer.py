@@ -4,30 +4,58 @@ import pandas as pd
 def analyze_log(df):
     report = []
 
-    # Анализ IP по частоте запросов
+    if df.empty:
+        return "Лог-файл пуст или не удалось распарсить."
+
+    # Проверка на частые запросы
     ip_counts = df['ip'].value_counts()
-    suspicious_ips = ip_counts[ip_counts > 3]
-    if not suspicious_ips.empty:
-        report.append("🔴 Подозрительные IP (частые запросы):")
-        for ip, count in suspicious_ips.items():
-            report.append(f"— IP {ip}: {count} запросов")
+    frequent_ips = ip_counts[ip_counts > 3]
+    if not frequent_ips.empty:
+        report.append("\n🔁 Частые запросы с IP:")
+        for ip, count in frequent_ips.items():
+            report.append(f"- IP {ip}: {count} запросов")
 
-    # Подозрительные запросы по времени (ночь)
-    night_access = df[df['datetime'].dt.hour.isin(range(0, 6))]
-    if not night_access.empty:
-        report.append("\n🌙 Подозрительные ночные доступы:")
-        for _, row in night_access.iterrows():
-            time_str = row['datetime'].strftime('%d/%m/%Y %H:%M:%S')
-            report.append(f"— IP {row['ip']} в {time_str}")
+    # Проверка на ночной доступ (0-5 ч)
+    night = df[df['datetime'].dt.hour.between(0, 5)]
+    if not night.empty:
+        report.append("\n🌙 Доступ в ночное время:")
+        for _, row in night.iterrows():
+            t = row['datetime'].strftime('%H:%M')
+            report.append(f"- {row['ip']} в {t} -> {row['url']}")
 
-    # Анализ ошибок доступа (статус 4xx и 5xx)
+    # Ошибки 4xx и 5xx
     errors = df[df['status'].astype(str).str.startswith(('4', '5'))]
     if not errors.empty:
-        report.append("\n🚨 Обнаружены ошибки доступа:")
+        report.append("\n🚨 Ошибки доступа (4xx/5xx):")
         for _, row in errors.iterrows():
-            report.append(f"— IP {row['ip']} запросил {row['url']} (статус {row['status']})")
+            report.append(f"- {row['ip']} -> {row['url']} [{row['status']}]")
+
+    # Проверка на нестандартные HTTP-методы
+    common_methods = {'GET', 'POST', 'HEAD'}
+    uncommon = df[~df['method'].isin(common_methods)]
+    if not uncommon.empty:
+        report.append("\n🧪 Подозрительные HTTP-методы:")
+        for _, row in uncommon.iterrows():
+            report.append(f"- {row['ip']} использует {row['method']} на {row['url']}")
+
+    # Анализ последовательных неудачных логинов (401)
+    brute_df = df[df['status'] == '401']
+    brute_attempts = brute_df['ip'].value_counts()
+    if not brute_attempts.empty:
+        report.append("\n🔐 Подозрение на брутфорс (401):")
+        for ip, count in brute_attempts.items():
+            if count >= 3:
+                report.append(f"- {ip}: {count} попыток")
+
+    # Анализ частоты 5xx (возможный DoS)
+    dos_df = df[df['status'].astype(str).str.startswith('5')]
+    if not dos_df.empty and dos_df['ip'].value_counts().max() > 3:
+        report.append("\n🔥 Возможная DoS-атака:")
+        for ip, count in dos_df['ip'].value_counts().items():
+            if count > 3:
+                report.append(f"- {ip}: {count} ошибок 5xx")
 
     if not report:
-        report.append("✅ Аномалий не обнаружено.")
+        return "✅ Аномалий не выявлено."
 
     return '\n'.join(report)
