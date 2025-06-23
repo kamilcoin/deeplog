@@ -1,0 +1,49 @@
+
+🛠️ Access to known attack paths:
+- 45.67.89.10 -> /admin
+- 45.67.89.10 -> /phpmyadmin
+- 45.67.89.10 -> /config.php
+- 45.67.89.10 -> /wp-login.php
+- 198.51.100.55 -> /admin
+- 198.51.100.55 -> /admin
+- 198.51.100.55 -> /admin
+- 198.51.100.55 -> /admin
+- 198.51.100.55 -> /admin
+
+🔁 Frequent requests from IPs:
+- 45.67.89.10 ((no hostname)): 7 requests
+- 203.0.113.77 ((no hostname)): 6 requests
+- 198.51.100.55 ((no hostname)): 5 requests
+
+🌙 Night-time access:
+- 45.67.89.10 at 01:02 -> /admin
+- 45.67.89.10 at 01:02 -> /phpmyadmin
+- 45.67.89.10 at 01:02 -> /config.php
+- 45.67.89.10 at 01:02 -> /wp-login.php
+- 45.67.89.10 at 01:02 -> /login?user=admin&pass=123
+- 45.67.89.10 at 01:02 -> /?cmd=ls
+- 45.67.89.10 at 01:02 -> /search?q=<script>alert(1)</script>
+- 198.51.100.55 at 02:45 -> /admin
+- 198.51.100.55 at 02:45 -> /admin
+- 198.51.100.55 at 02:45 -> /admin
+- 198.51.100.55 at 02:45 -> /admin
+- 198.51.100.55 at 02:45 -> /admin
+
+🚨 Access errors (4xx/5xx):
+- 45.67.89.10 -> /admin [403]
+- 45.67.89.10 -> /phpmyadmin [404]
+- 45.67.89.10 -> /config.php [403]
+- 45.67.89.10 -> /wp-login.php [401]
+- 45.67.89.10 -> /login?user=admin&pass=123 [401]
+- 198.51.100.55 -> /admin [403]
+- 198.51.100.55 -> /admin [403]
+- 198.51.100.55 -> /admin [403]
+- 198.51.100.55 -> /admin [403]
+- 198.51.100.55 -> /admin [403]
+
+🔐 Brute-force suspicion (401 Unauthorized):
+
+📍 Summary of Suspicious IPs:
+- 198.51.100.55 ((no hostname)) | Romania | București | Bucharest
+- 203.0.113.77 ((no hostname)) | United States | New York | New York
+- 45.67.89.10 ((no hostname)) | Bulgaria | Kyustendil | Kyustendil | Payloads: XSS, RCE

@@ -64,7 +64,8 @@ def analyze_log(df):
     if df.empty:
         return "Log file is empty or parsing failed."
 
-    df['timestamp'] = df['datetime'].dt.floor('T')
+    df['timestamp'] = df['datetime'].dt.floor('min')
+
 
     # Detect payloads in URLs
     for _, row in df.iterrows():
