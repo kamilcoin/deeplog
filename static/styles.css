@@ -300,8 +300,10 @@ a:hover {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding: 0 0 0 18px;
-    height: 60px;
+    padding: 0 0 10px 18px;
+    /* Added 10px bottom padding */
+    height: 100px;
+    /* Slightly increased height for balance */
     position: fixed;
     top: 0;
     left: 0;
@@ -316,18 +318,18 @@ a:hover {
 }
 
 .nav-avatar {
-    width: 48px;
-    height: 48px;
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
     border: 2px solid #00ffe7;
-    box-shadow: 0 0 8px #00ffe7cc;
+    box-shadow: 0 0 12px #00ffe7cc;
     transition: transform 0.18s, box-shadow 0.18s;
     background: #0f2027;
 }
 
 .nav-avatar:hover {
     transform: scale(1.09) rotate(-3deg);
-    box-shadow: 0 0 18px #00ffe7cc;
+    box-shadow: 0 0 22px #00ffe7cc;
 }
 
 /* Remove nav-right and cyber-btn styles */
