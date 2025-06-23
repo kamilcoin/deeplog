@@ -13,8 +13,15 @@ body {
 }
 
 @keyframes fadeInBody {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .container {
@@ -31,8 +38,15 @@ body {
 }
 
 @keyframes slideUp {
-    from { transform: translateY(50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 h1 {
@@ -44,8 +58,15 @@ h1 {
 }
 
 @keyframes fadeInTitle {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 input[type="file"] {
@@ -81,8 +102,15 @@ button:hover {
 }
 
 @keyframes fadeInButton {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 pre {
@@ -98,12 +126,17 @@ pre {
     font-size: 14px;
     line-height: 1.6;
     animation: fadeInReport 0.8s ease-in;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 @keyframes fadeInReport {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 a {
@@ -122,6 +155,43 @@ a:hover {
 }
 
 @keyframes fadeInLink {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Progress Bar Styles */
+.progress-container {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    margin: 24px 0 10px 0;
+    height: 24px;
+    display: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #3b82f6, #60a5fa);
+    border-radius: 8px;
+    transition: width 0.3s;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.progress-label {
+    margin-top: 8px;
+    font-size: 15px;
+    color: #b3e5fc;
+    font-weight: 500;
+    display: none;
 }

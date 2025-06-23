@@ -10,10 +10,91 @@
     <h1>🔎DeepLog</h1>
     <p style="opacity:0.85; font-size:14px;">Upload your server logs to detect anomalies, threats, and security issues in real time.</p>
 
-    <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+    <form id="uploadForm" action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
       <input type="file" name="logfile" required>
       <button type="submit">Start Analysis</button>
     </form>
+
+    <div class="progress-container" id="progressContainer">
+      <div class="progress-bar" id="progressBar">0%</div>
+    </div>
+    <div class="progress-label" id="progressLabel">Uploading...</div>
   </div>
+  <script>
+  const form = document.getElementById('uploadForm');
+  const progressBar = document.getElementById('progressBar');
+  const progressContainer = document.getElementById('progressContainer');
+  const progressLabel = document.getElementById('progressLabel');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const fileInput = form.querySelector('input[type="file"]');
+    if (!fileInput.files.length) return;
+
+    const fileSize = fileInput.files[0].size; // in bytes
+
+    // Set upload duration: 3s base + 0.5s per MB (adjust as needed)
+    const minUploadDuration = 3000; // ms
+    const msPerMB = 500; // ms per MB
+    const fileSizeMB = fileSize / (1024 * 1024);
+    const uploadDuration = minUploadDuration + fileSizeMB * msPerMB;
+
+    const analyzeDuration = 2000; // ms
+
+    progressContainer.style.display = 'block';
+    progressLabel.style.display = 'block';
+    progressBar.style.width = '0%';
+    progressBar.textContent = '0%';
+    progressLabel.textContent = 'Uploading...';
+
+    const formData = new FormData(form);
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', form.action, true);
+
+    let percent = 0;
+
+    // Animate from 0 to 99% slowly, duration depends on file size
+    const uploadSteps = 99;
+    const uploadStepTime = uploadDuration / uploadSteps;
+
+    const uploadInterval = setInterval(() => {
+      if (percent < 99) {
+        percent += 1;
+        progressBar.style.width = percent + '%';
+        progressBar.textContent = percent + '%';
+      }
+    }, uploadStepTime);
+
+    xhr.onload = function() {
+      clearInterval(uploadInterval);
+      // Animate from 99 to 100% with "Analyzing..."
+      progressLabel.textContent = 'Analyzing...';
+      let analyzePercent = percent;
+      const analyzeSteps = 100 - analyzePercent;
+      const analyzeStepTime = analyzeDuration / analyzeSteps;
+      const analyzeInterval = setInterval(() => {
+        analyzePercent += 1;
+        progressBar.style.width = analyzePercent + '%';
+        progressBar.textContent = analyzePercent + '%';
+        if (analyzePercent >= 100) {
+          clearInterval(analyzeInterval);
+          progressLabel.textContent = 'Completed!';
+          setTimeout(() => {
+            document.open();
+            document.write(xhr.responseText);
+            document.close();
+          }, 800);
+        }
+      }, analyzeStepTime);
+    };
+
+    xhr.onerror = function() {
+      clearInterval(uploadInterval);
+      progressLabel.textContent = 'Upload failed.';
+    };
+
+    xhr.send(formData);
+  });
+  </script>
 </body>
 </html>

@@ -1,21 +1,27 @@
 
-🔁 Частые запросы с IP:
-- IP 192.0.2.99: 4 запросов
-- IP 198.51.100.23: 4 запросов
+🛠️ Access to known attack paths:
+- 198.51.100.23 -> /admin
+- 198.51.100.23 -> /admin
+- 198.51.100.23 -> /admin
+- 198.51.100.23 -> /admin
 
-🌙 Доступ в ночное время:
-- 203.0.113.55 в 02:30 -> /dashboard
-- 203.0.113.55 в 02:31 -> /dashboard
-- 203.0.113.55 в 02:32 -> /dashboard
-- 198.51.100.23 в 03:45 -> /admin
-- 198.51.100.23 в 03:47 -> /admin
-- 198.51.100.23 в 03:48 -> /admin
-- 198.51.100.23 в 03:49 -> /admin
-- 192.0.2.99 в 00:01 -> /secure
-- 192.0.2.99 в 00:03 -> /secure
-- 192.0.2.99 в 00:05 -> /secure
+🔁 Frequent requests from IPs:
+- 198.51.100.23 ((no hostname)): 4 requests
+- 192.0.2.99 ((no hostname)): 4 requests
 
-🚨 Ошибки доступа (4xx/5xx):
+🌙 Night-time access:
+- 203.0.113.55 at 02:30 -> /dashboard
+- 203.0.113.55 at 02:31 -> /dashboard
+- 203.0.113.55 at 02:32 -> /dashboard
+- 198.51.100.23 at 03:45 -> /admin
+- 198.51.100.23 at 03:47 -> /admin
+- 198.51.100.23 at 03:48 -> /admin
+- 198.51.100.23 at 03:49 -> /admin
+- 192.0.2.99 at 00:01 -> /secure
+- 192.0.2.99 at 00:03 -> /secure
+- 192.0.2.99 at 00:05 -> /secure
+
+🚨 Access errors (4xx/5xx):
 - 203.0.113.55 -> /dashboard [404]
 - 203.0.113.55 -> /dashboard [404]
 - 203.0.113.55 -> /dashboard [404]
@@ -23,3 +29,8 @@
 - 198.51.100.23 -> /admin [403]
 - 198.51.100.23 -> /admin [403]
 - 198.51.100.23 -> /admin [403]
+
+📍 Summary of Suspicious IPs:
+- 192.0.2.99 ((no hostname)) | (location unknown)
+- 198.51.100.23 ((no hostname)) | Romania | București | Bucharest
+- 203.0.113.55 ((no hostname)) | United States | New York | New York
