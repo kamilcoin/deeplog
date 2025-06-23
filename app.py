@@ -1,8 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 import os
 from parser import parse_log
-from analyzer import analyze_log
-
+from analyzer import analyze_log, analyze_json_log
 UPLOAD_FOLDER = 'uploads'
 REPORT_FOLDER = 'reports'
 
@@ -29,8 +28,12 @@ def upload():
     filepath = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
     file.save(filepath)
 
+    ext = os.path.splitext(filepath)[1].lower()
     parsed_data = parse_log(filepath)
-    analysis = analyze_log(parsed_data)
+    if ext == '.json':
+        analysis = analyze_json_log(parsed_data.to_dict(orient='records'))
+    else:
+        analysis = analyze_log(parsed_data)
 
     report_path = os.path.join(app.config['REPORT_FOLDER'], file.filename + '_report.txt')
     with open(report_path, 'w', encoding='utf-8') as f:
