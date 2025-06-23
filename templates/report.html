@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Отчёт анализа логов</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Результаты анализа 📋</h1>
+        <pre>{{ report }}</pre>
+        <a href="{{ url_for('index') }}">Назад</a>
+    </div>
+</body>
+</html>

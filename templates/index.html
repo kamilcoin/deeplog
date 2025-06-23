@@ -1,11 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>LogScan App</title>
+    <title>LogScan - Анализатор логов</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>LogScan готов к работе!</h1>
+    <div class="container">
+        <h1>LogScan 🔍</h1>
+        <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+            <input type="file" name="logfile" required>
+            <button type="submit">Анализировать лог</button>
+        </form>
+    </div>
 </body>
 </html>
