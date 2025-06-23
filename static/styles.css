@@ -1,64 +1,121 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #eef3fa;
-    color: #333;
+    background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+    color: #f4f4f4;
     margin: 0;
     padding: 0;
     display: flex;
-    align-items: center;
     justify-content: center;
-    height: 100vh;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+    animation: fadeInBody 1s ease-in;
+}
+
+@keyframes fadeInBody {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .container {
-    background: #ffffff;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-    padding: 30px;
-    border-radius: 12px;
-    width: 500px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 600px;
     text-align: center;
+    animation: slideUp 0.8s ease-in-out;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
 }
 
 h1 {
-    margin-bottom: 25px;
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+    color: #ffffff;
+    letter-spacing: 1px;
+    animation: fadeInTitle 1s ease-in;
+}
+
+@keyframes fadeInTitle {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
 }
 
 input[type="file"] {
-    margin: 20px auto;
-    display: block;
+    margin: 20px 0;
+    background-color: #1e2a38;
+    padding: 12px;
+    border: 1px solid #4b6e91;
+    color: #f4f4f4;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+input[type="file"]:hover {
+    border-color: #60a5fa;
 }
 
 button {
+    padding: 10px 20px;
     background-color: #3b82f6;
     color: white;
     border: none;
     border-radius: 6px;
-    padding: 10px 20px;
+    font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    animation: fadeInButton 1.2s ease-in;
 }
 
 button:hover {
     background-color: #2563eb;
+    transform: scale(1.05);
+}
+
+@keyframes fadeInButton {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 pre {
     text-align: left;
-    background-color: #f6f8fc;
-    padding: 15px;
-    border-radius: 8px;
+    background-color: #0e1a24;
+    padding: 20px;
+    border-radius: 10px;
     overflow-x: auto;
     white-space: pre-wrap;
+    color: #e6f7ff;
+    font-size: 14px;
+    line-height: 1.6;
+    animation: fadeInReport 1s ease-in;
+}
+
+@keyframes fadeInReport {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 a {
     display: inline-block;
     margin-top: 15px;
+    color: #4ea9f7;
     text-decoration: none;
-    color: #2563eb;
+    font-weight: bold;
     transition: color 0.2s;
+    animation: fadeInLink 1.2s ease-in;
 }
 
 a:hover {
-    color: #1d4ed8;
+    color: #1d72d8;
+}
+
+@keyframes fadeInLink {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }

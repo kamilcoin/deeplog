@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Отчёт анализа - LogScan</title>
-    <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>DeepLog — Report</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1>📋 Отчёт анализа логов</h1>
-        <pre>{{ report }}</pre>
-        <a href="{{ url_for('index') }}">🔙 Вернуться назад</a>
-    </div>
+  <div class="container">
+    <h1>Analysis Report</h1>
+    <pre>{{ report }}</pre>
+    <a href="{{ url_for('index') }}">← Back to Upload</a>
+  </div>
 </body>
 </html>

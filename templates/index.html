@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>LogScan Analyzer</title>
-    <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>🔎DeepLog — Log Analyzr</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1>🛡️ LogScan Analyzer</h1>
-        <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
-            <input type="file" name="logfile" required>
-            <button type="submit">Запустить анализ</button>
-        </form>
-    </div>
+  <div class="container">
+    <h1>🔎DeepLog</h1>
+    <p style="opacity:0.85; font-size:14px;">Upload your server logs to detect anomalies, threats, and security issues in real time.</p>
+
+    <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+      <input type="file" name="logfile" required>
+      <button type="submit">Start Analysis</button>
+    </form>
+  </div>
 </body>
 </html>
