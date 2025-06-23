@@ -55,7 +55,27 @@
     </div>
     <div class="progress-label" id="progressLabel">Uploading...</div>
   </div>
-
+  <audio id="bgMusic" src="{{ url_for('static', filename='background.mp3') }}" autoplay loop></audio>
+    <button id="musicBtn" style="position:fixed;left:30px;bottom:30px;z-index:150;background:rgba(30,40,60,0.81);color:#fff;font-size:17px;padding:12px 23px;border-radius:16px;border:none;box-shadow:0 3px 16px #1e1e2f44;font-weight:700;cursor:pointer;letter-spacing:1px;">🔊 Music On</button>
+    <script>
+    const bgMusic = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('musicBtn');
+    let isPlaying = true;
+    musicBtn.onclick = function() {
+        if(isPlaying) {
+            bgMusic.pause();
+            musicBtn.textContent = "🔇 Music Off";
+        } else {
+            bgMusic.play();
+            musicBtn.textContent = "🔊 Music On";
+        }
+        isPlaying = !isPlaying;
+    };
+    window.addEventListener('click', function playAudioOnce() {
+        bgMusic.play();
+        window.removeEventListener('click', playAudioOnce);
+    });
+    </script>
   <!-- DONATION BUTTON + POPUP -->
   <button class="donate-btn" id="donateBtn">💎 Donate</button>
   <div class="donate-modal" id="donateModal">
