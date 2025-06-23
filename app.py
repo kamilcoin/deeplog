@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 import os
 from parser import parse_log
 from analyzer import analyze_log, analyze_json_log
@@ -35,11 +35,16 @@ def upload():
     else:
         analysis = analyze_log(parsed_data)
 
-    report_path = os.path.join(app.config['REPORT_FOLDER'], file.filename + '_report.txt')
+    report_filename = file.filename + '_report.txt'
+    report_path = os.path.join(app.config['REPORT_FOLDER'], report_filename)
     with open(report_path, 'w', encoding='utf-8') as f:
         f.write(analysis)
 
-    return render_template('report.html', report=analysis)
+    return render_template('report.html', report=analysis, report_filename=report_filename)
+
+@app.route('/download/<filename>')
+def download_report(filename):
+    return send_from_directory(app.config['REPORT_FOLDER'], filename, as_attachment=True)
 
 if __name__ == '__main__':
     app.run(debug=True)

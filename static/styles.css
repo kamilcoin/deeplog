@@ -195,3 +195,21 @@ a:hover {
     font-weight: 500;
     display: none;
 }
+
+.download-btn {
+    display: inline-block;
+    padding: 10px 22px;
+    background: #2563eb;
+    color: #fff;
+    border-radius: 7px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    transition: background 0.2s;
+}
+
+.download-btn:hover {
+    background: #1e40af;
+    color: #fff;
+}

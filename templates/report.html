@@ -8,6 +8,11 @@
 <body>
   <div class="container">
     <h1>Analysis Report</h1>
+    <div style="margin-bottom: 20px;">
+      <a href="{{ url_for('download_report', filename=report_filename) }}" class="download-btn" download>
+        ⬇️ Download Report (.txt)
+      </a>
+    </div>
     <pre>{{ report }}</pre>
     <a href="{{ url_for('index') }}">← Back to Upload</a>
   </div>
