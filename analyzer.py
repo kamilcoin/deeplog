@@ -174,3 +174,53 @@ def analyze_log(df):
         return "✅ No anomalies detected."
 
     return '\n'.join(report)
+
+def analyze_json_log(json_data):
+    """
+    Analyze logs in JSON format (list of dicts).
+    """
+    import pandas as pd
+
+    if not json_data or not isinstance(json_data, list):
+        return "JSON log is empty or invalid format."
+
+    df = pd.DataFrame(json_data)
+    report = []
+
+    # Convert timestamp to datetime if present
+    if 'timestamp' in df.columns:
+        df['timestamp'] = pd.to_datetime(df['timestamp'], errors='coerce')
+
+    # Count events by level
+    if 'level' in df.columns:
+        level_counts = df['level'].value_counts()
+        report.append("🔎 Log levels:")
+        for level, count in level_counts.items():
+            report.append(f"- {level}: {count}")
+
+    # Detect errors and warnings
+    if 'level' in df.columns:
+        errors = df[df['level'].isin(['ERROR', 'WARNING'])]
+        if not errors.empty:
+            report.append("\n🚨 Errors and Warnings:")
+            for _, row in errors.iterrows():
+                ts = row.get('timestamp', '')
+                msg = row.get('message', '')
+                evt = row.get('event', '')
+                report.append(f"- [{ts}] {evt}: {msg}")
+
+    # Detect potential vulnerabilities
+    if 'event' in df.columns:
+        vulns = df[df['event'].str.contains('Vuln', na=False)]
+        if not vulns.empty:
+            report.append("\n🛡️ Potential Vulnerabilities:")
+            for _, row in vulns.iterrows():
+                vuln = row.get('vulnerability', '')
+                tgt = row.get('target', '')
+                msg = row.get('message', '')
+                report.append(f"- {vuln} on {tgt}: {msg}")
+
+    if not report:
+        return "✅ No anomalies detected in JSON log."
+
+    return '\n'.join(report)
