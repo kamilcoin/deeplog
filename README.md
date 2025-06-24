@@ -1,4 +1,4 @@
-# 🔍 DeepLog — AI-Powered Server Log Analyzer
+# 🔍 DeepLog — Server Log Analyzer
 
 [![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python)](https://www.python.org/)
 [![Flask](https://img.shields.io/badge/Flask-Web_App-black?logo=flask)](https://flask.palletsprojects.com/)
