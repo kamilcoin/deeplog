@@ -3,6 +3,7 @@
 [![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python)](https://www.python.org/)
 [![Flask](https://img.shields.io/badge/Flask-Web_App-black?logo=flask)](https://flask.palletsprojects.com/)
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Star](https://img.shields.io/github/stars/kamilcoin/deeplog?style=for-the-badge)](https://github.com/kamilcoin/deeplog/stargazers)
 
 > **Upload logs. Detect anomalies. Stay secure.**  
 **DeepLog** is a sleek and powerful web application that allows you to upload server log files and get instant analysis. It helps identify anomalies, potential threats, and security issues in real time — all wrapped in a beautiful and modern UI.
