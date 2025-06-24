@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DeepLog — Analysis Report</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+  <style>body {
+    background: #181c20;
+    color: #f3f6fa;
+    font-family: 'Inter', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #23272e;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25);
+    padding: 36px 32px 32px 32px;
+}
+
+h1 {
+    font-weight: 800;
+    font-size: 2.3rem;
+    margin-bottom: 18px;
+    letter-spacing: -1px;
+    color: #7dd3fc;
+    text-shadow: 0 2px 12px #0ea5e933;
+}
+
+.download-btn {
+    display: inline-block;
+    background: linear-gradient(90deg, #0ea5e9 0%, #38bdf8 100%);
+    color: #fff;
+    font-weight: 700;
+    padding: 12px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 8px #0ea5e955;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.download-btn:hover {
+    background: linear-gradient(90deg, #38bdf8 0%, #0ea5e9 100%);
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 4px 16px #38bdf855;
+}
+
+pre {
+    background: #15181c;
+    color: #f3f6fa;
+    border-radius: 10px;
+    padding: 24px;
+    font-size: 1.08rem;
+    line-height: 1.7;
+    overflow-x: auto;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px #0ea5e933;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+a {
+    color: #7dd3fc;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: #38bdf8;
+    text-decoration: underline;
+}
+
+.footer {
+    margin-top: 32px;
+    text-align: center;
+    color: #64748b;
+    font-size: 0.98rem;
+    opacity: 0.7;
+}
+
+.bottom-actions {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 16px 4px;
+    }
+
+    pre {
+        padding: 12px;
+        font-size: 0.98rem;
+    }
+
+    h1 {
+        font-size: 1.3rem;
+    }
+
+    .bottom-actions {
+        gap: 8px;
+    }
+}</style>
+  
+</head>
+<body>
+  <div class="container">
+    <h1>🚀 DeepLog Analysis Report</h1>
+    <pre>=== DeepLog Log Super Analysis ===
+
+🗂️ Endpoint Frequency:
+  - /admin: 4
+  - /secure: 4
+  - /dashboard: 3
+  - /home: 1
+  - /login: 1
+
+🔎 HTTP Methods Used:
+  - GET: 9
+  - POST: 4
+
+📊 Status Codes:
+  - 200: 6
+  - 403: 4
+  - 404: 3
+
+🌐 Top IPs:
+  - 198.51.100.23 ((no hostname)): 4 requests
+  - 192.0.2.99 ((no hostname)): 4 requests
+  - 203.0.113.55 ((no hostname)): 3 requests
+  - 192.168.1.10 ((no hostname)): 1 requests
+  - 192.168.1.20 ((no hostname)): 1 requests
+
+🎯 Top Endpoints:
+  - /admin: 4 hits
+  - /secure: 4 hits
+  - /dashboard: 3 hits
+  - /home: 1 hits
+  - /login: 1 hits
+
+🛠️ Access to known attack paths:
+  - 198.51.100.23 -&gt; /admin
+  - 198.51.100.23 -&gt; /admin
+  - 198.51.100.23 -&gt; /admin
+  - 198.51.100.23 -&gt; /admin
+
+🔁 Frequent requests from IPs:
+  - 198.51.100.23 ((no hostname)): 4 requests
+  - 192.0.2.99 ((no hostname)): 4 requests
+
+🌙 Night-time access:
+  - 203.0.113.55 at 02:30 -&gt; /dashboard
+  - 203.0.113.55 at 02:31 -&gt; /dashboard
+  - 203.0.113.55 at 02:32 -&gt; /dashboard
+  - 198.51.100.23 at 03:45 -&gt; /admin
+  - 198.51.100.23 at 03:47 -&gt; /admin
+  - 198.51.100.23 at 03:48 -&gt; /admin
+  - 198.51.100.23 at 03:49 -&gt; /admin
+  - 192.0.2.99 at 00:01 -&gt; /secure
+  - 192.0.2.99 at 00:03 -&gt; /secure
+  - 192.0.2.99 at 00:05 -&gt; /secure
+
+🚨 Access errors (4xx/5xx):
+  - 203.0.113.55 -&gt; /dashboard [404]
+  - 203.0.113.55 -&gt; /dashboard [404]
+  - 203.0.113.55 -&gt; /dashboard [404]
+  - 198.51.100.23 -&gt; /admin [403]
+  - 198.51.100.23 -&gt; /admin [403]
+  - 198.51.100.23 -&gt; /admin [403]
+  - 198.51.100.23 -&gt; /admin [403]
+
+🕒 Timeline of Requests:
+  - [2025-06-22 02:30:15+04:00] 203.0.113.55 GET /dashboard [404]
+  - [2025-06-22 02:31:15+04:00] 203.0.113.55 GET /dashboard [404]
+  - [2025-06-22 02:32:15+04:00] 203.0.113.55 GET /dashboard [404]
+  - [2025-06-22 03:45:22+04:00] 198.51.100.23 GET /admin [403]
+  - [2025-06-22 03:47:11+04:00] 198.51.100.23 POST /admin [403]
+  - [2025-06-22 03:48:11+04:00] 198.51.100.23 POST /admin [403]
+  - [2025-06-22 03:49:11+04:00] 198.51.100.23 POST /admin [403]
+  - [2025-06-22 12:00:01+04:00] 192.168.1.10 GET /home [200]
+  - [2025-06-22 12:05:02+04:00] 192.168.1.20 POST /login [200]
+  - [2025-06-22 23:58:01+04:00] 192.0.2.99 GET /secure [200]
+  - [2025-06-23 00:01:22+04:00] 192.0.2.99 GET /secure [200]
+  - [2025-06-23 00:03:55+04:00] 192.0.2.99 GET /secure [200]
+  - [2025-06-23 00:05:12+04:00] 192.0.2.99 GET /secure [200]
+
+📍 Summary of Suspicious IPs:
+  - 192.0.2.99 ((no hostname)) | (location unknown)
+  - 198.51.100.23 ((no hostname)) | Romania | București | Bucharest
+  - 203.0.113.55 ((no hostname)) | United States | New York | New York
+</pre>
+    <div class="footer">
+      Generated by <b>DeepLog</b> &mdash; test_log_anomalies.log_report.html
+    </div>
+  </div>
+</body>
+</html>

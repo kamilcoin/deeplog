@@ -28,7 +28,7 @@
     {% endif %}
   {% endwith %}
 
-  <div class="container">
+  <div class="container" style="position:relative;">
     <h1>
       <span style="vertical-align: middle;">
         <svg width="36" height="36" viewBox="0 0 32 32" style="margin-bottom: -7px;">
@@ -49,10 +49,10 @@
       <button type="submit">Start Analysis</button>
     </form>
 
-    <div class="progress-container" id="progressContainer">
-      <div class="progress-bar" id="progressBar">0%</div>
+    <div id="uploadingMsg" class="uploading-msg-bottom">
+      <span class="spinner" style="margin-right:8px;"></span>
+      Uploading... Please wait.
     </div>
-    <div class="progress-label" id="progressLabel">Uploading...</div>
   </div>
   <audio id="bgMusic" src="{{ url_for('static', filename='background.mp3') }}" autoplay loop></audio>
   <!-- DONATION BUTTON + POPUP -->
@@ -62,7 +62,7 @@
     <button class="donate-btn" id="donateBtn">💎 Donate</button>
   </div>
 
-  <div class="donate-modal" id="donateModal">
+  <div class="donate-modal" id="donateModal" style="display:none;">
     <div class="donate-modal-content">
       <span class="donate-close" id="donateClose">&times;</span>
       <h2 style="margin-bottom:18px;">Support DeepLog</h2>

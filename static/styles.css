@@ -245,40 +245,11 @@ a:hover {
     }
 }
 
-/* Progress Bar Styles */
-.progress-container {
-    width: 100%;
-    background: rgba(255, 255, 255, 0.10);
-    border-radius: 10px;
-    margin: 32px 0 14px 0;
-    height: 28px;
-    display: none;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.10);
-    border: 1.5px solid rgba(96, 165, 250, 0.10);
-}
-
-.progress-bar {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 100%);
-    border-radius: 10px;
-    transition: width 0.3s;
-    text-align: center;
-    color: #fff;
-    font-weight: bold;
-    font-size: 15px;
-    line-height: 28px;
-    letter-spacing: 0.5px;
-    box-shadow: 0 2px 8px rgba(36, 99, 235, 0.09);
-}
-
+/* Remove all loading bar related styles */
+.progress-container,
+.progress-bar,
 .progress-label {
-    margin-top: 10px;
-    font-size: 16px;
-    color: #b3e5fc;
-    font-weight: 600;
-    display: none;
-    letter-spacing: 0.2px;
+    display: none !important;
 }
 
 /* Download Button - Premium Style */
@@ -521,4 +492,39 @@ a:hover {
     margin: 0 8px;
     letter-spacing: 0.5px;
     animation: fadeInBody 0.6s;
+}
+
+.spinner {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 3px solid #60a5fa;
+    border-top: 3px solid #2563eb;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    vertical-align: middle;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.uploading-msg-bottom {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 10px;
+    /* Not flush with bottom, adjust as needed */
+    color: #60a5fa;
+    font-weight: 700;
+    margin: 0 auto;
+    width: fit-content;
+    background: none;
+    display: none;
 }
