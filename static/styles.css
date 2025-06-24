@@ -25,6 +25,60 @@ body {
     }
 }
 
+
+
+.footer-bar {
+    width: 100%;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 0 0 10px 0;
+    /* Remove side padding */
+    background: none;
+    z-index: 200;
+    box-shadow: none;
+}
+
+.music-btn {
+    position: static !important;
+    background: rgba(30, 40, 60, 0.81);
+    color: #fff;
+    font-size: 17px;
+    padding: 12px 23px;
+    border-radius: 16px;
+    border: none;
+    box-shadow: 0 3px 16px #1e1e2f44;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 1px;
+    margin-left: 18px;
+    /* Add gap from left edge */
+    margin-right: 0;
+}
+
+.donate-btn {
+    position: static !important;
+    padding: 12px 23px;
+    background: linear-gradient(90deg, #2563eb 0%, #60a5fa 100%);
+    color: #fff;
+    border: none;
+    border-radius: 16px;
+    font-size: 17px;
+    font-weight: 800;
+    box-shadow: 0 4px 20px rgba(36, 99, 235, 0.15);
+    cursor: pointer;
+    transition: background 0.18s, transform 0.18s, box-shadow 0.18s;
+    letter-spacing: 1px;
+    outline: none;
+    margin-right: 18px;
+    /* Add gap from right edge */
+    margin-left: 0;
+}
+
 .container {
     background: rgba(255, 255, 255, 0.10);
     backdrop-filter: blur(22px) saturate(1.5);
@@ -292,31 +346,25 @@ a:hover {
     }
 }
 
-.donate-btn {
-    position: fixed;
-    bottom: 30px;
-    right: 38px;
-    z-index: 140;
-    padding: 14px 32px;
-    background: linear-gradient(90deg, #2563eb 0%, #60a5fa 100%);
-    color: #fff;
-    border: none;
-    border-radius: 16px;
-    font-size: 1.17rem;
-    font-weight: 800;
-    box-shadow: 0 4px 20px rgba(36, 99, 235, 0.15);
-    cursor: pointer;
-    transition: background 0.18s, transform 0.18s, box-shadow 0.18s;
-    letter-spacing: 0.8px;
-    outline: none;
-    animation: fadeInButton 1s;
-}
+
 
 .donate-btn:hover {
     background: linear-gradient(90deg, #1e40af 0%, #3b82f6 100%);
     color: #fff;
     transform: translateY(-2px) scale(1.05);
     box-shadow: 0 8px 32px 0 rgba(36, 99, 235, 0.22);
+}
+
+.copyright-footer {
+    text-align: center;
+    color: #7dd3fc;
+    font-size: 1.08rem;
+    opacity: 0.75;
+    letter-spacing: 1px;
+    font-weight: 700;
+    flex: 1;
+    margin: 0 18px;
+    white-space: nowrap;
 }
 
 .donate-modal {
@@ -450,9 +498,6 @@ a:hover {
 
 /* Remove nav-right and cyber-btn styles */
 
-.copyMsg {
-    display: none !important;
-}
 
 .flash-messages {
     width: 100%;

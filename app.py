@@ -3,6 +3,7 @@ import os
 from parser import parse_log
 from analyzer import analyze_log, analyze_json_log
 import json
+from flask import render_template_string
 
 UPLOAD_FOLDER = 'uploads'
 REPORT_FOLDER = 'reports'
@@ -85,12 +86,33 @@ def upload():
             os.remove(filepath)
         return redirect(url_for('index'))
 
-    report_filename = file.filename + '_report.txt'
+    report_filename = file.filename + '_report.html'
     report_path = os.path.join(app.config['REPORT_FOLDER'], report_filename)
-    with open(report_path, 'w', encoding='utf-8') as f:
-        f.write(analysis)
 
-    return render_template('report.html', report=analysis, report_filename=report_filename)
+    # For browser view (show buttons)
+    rendered_html = render_template(
+        'report.html',
+        report=analysis,
+        report_filename=report_filename,
+        download=False
+    )
+
+    # For saving the downloadable HTML (hide buttons, inline CSS)
+    with open(os.path.join('static', 'report.css'), 'r', encoding='utf-8') as f:
+        css_content = f.read()
+    font_link = '<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">'
+    rendered_html_download = render_template(
+        'report.html',
+        report=analysis,
+        report_filename=report_filename,
+        download=True,
+        inline_css=css_content,
+        font_link=font_link
+    )
+    with open(report_path, 'w', encoding='utf-8') as f:
+        f.write(rendered_html_download)
+
+    return rendered_html
 
 @app.route('/download/<filename>')
 def download_report(filename):

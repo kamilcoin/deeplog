@@ -257,6 +257,93 @@ def analyze_log(df):
             report.append(f"  - {ip} ({resolve_ip(ip)}) | {geo}{vpn}{note}")
         report.append("")
 
+    # 18. Repeated requests to same endpoint from same IP (possible scanning)
+    if 'ip' in df.columns and 'url' in df.columns:
+        repeated = df.groupby(['ip', 'url']).size().reset_index(name='count')
+        repeated = repeated[repeated['count'] > 10]
+        if not repeated.empty:
+            report.append("🔁 Repeated Requests to Same Endpoint (Possible Scanning):")
+            for _, row in repeated.iterrows():
+                suspicious_ips.add(row['ip'])
+                report.append(f"  - {row['ip']} -> {row['url']} ({row['count']} times)")
+            report.append("")
+
+    # 19. Requests with suspicious query length (very long queries)
+    if 'query' in df.columns and 'ip' in df.columns and 'url' in df.columns:
+        long_queries = df[df['query'].astype(str).str.len() > 200]
+        if not long_queries.empty:
+            report.append("🧬 Suspiciously Long Query Strings:")
+            for _, row in long_queries.iterrows():
+                report.append(f"  - {row['ip']} -> {row['url']} (query length: {len(str(row['query']))})")
+            report.append("")
+
+    # 20. Requests with empty user field (if present)
+    if 'user' in df.columns:
+        empty_user = df[df['user'].isnull() | (df['user'].astype(str).str.strip() == "")]
+        if not empty_user.empty:
+            report.append("👤 Requests with Empty User Field:")
+            for _, row in empty_user.iterrows():
+                suspicious_ips.add(row['ip'])
+                report.append(f"  - {row['ip']} -> {row.get('url', '')}")
+            report.append("")
+
+    # 14. Repeated events from same user (possible automation)
+    if 'user' in df.columns and 'event' in df.columns:
+        repeated_user_events = df.groupby(['user', 'event']).size().reset_index(name='count')
+        repeated_user_events = repeated_user_events[repeated_user_events['count'] > 10]
+        if not repeated_user_events.empty:
+            report.append("🔁 Repeated Events by Same User (Possible Automation):")
+            for _, row in repeated_user_events.iterrows():
+                report.append(f"  - {row['user']} -> {row['event']} ({row['count']} times)")
+            report.append("")
+
+    # 15. Events with very long messages (possible data leak or error dump)
+    if 'message' in df.columns:
+        long_msgs = df[df['message'].astype(str).str.len() > 300]
+        if not long_msgs.empty:
+            report.append("🧾 Events with Very Long Messages:")
+            for _, row in long_msgs.iterrows():
+                report.append(f"  - [{row.get('timestamp', '')}] {row.get('event', '')}: (message length: {len(str(row['message']))})")
+            report.append("")
+
+    # 13. Unusual event frequency (events that spike in a short time)
+    if 'event' in df.columns and 'timestamp' in df.columns:
+        event_minute = df.groupby([df['event'], df['timestamp'].dt.floor('min')]).size().reset_index(name='count')
+        spikes = event_minute[event_minute['count'] > 10]
+        if not spikes.empty:
+            report.append("📈 Unusual Event Frequency Spikes:")
+            for _, row in spikes.iterrows():
+                report.append(f"  - {row['event']} occurred {row['count']} times at {row['timestamp']}")
+            report.append("")
+
+    # 14. Rare events (events that occur only once)
+    if 'event' in df.columns:
+        rare_events = df['event'].value_counts()
+        rare_events = rare_events[rare_events == 1]
+        if not rare_events.empty:
+            report.append("🦄 Rare Events (occurred only once):")
+            for event in rare_events.index:
+                report.append(f"  - {event}")
+            report.append("")
+
+    # 15. Suspicious user agents (very short or empty)
+    if 'user_agent' in df.columns:
+        short_ua = df[df['user_agent'].astype(str).str.len() < 10]
+        if not short_ua.empty:
+            report.append("🤖 Suspiciously Short User Agents:")
+            for _, row in short_ua.iterrows():
+                report.append(f"  - {row.get('ip', '')} UA: {row['user_agent']}")
+            report.append("")
+
+    # 16. Requests with non-ASCII in URL (possible obfuscation)
+    if 'url' in df.columns:
+        non_ascii = df[df['url'].astype(str).apply(lambda x: any(ord(c) > 127 for c in x))]
+        if not non_ascii.empty:
+            report.append("🕵️ URLs with Non-ASCII Characters (possible obfuscation):")
+            for _, row in non_ascii.iterrows():
+                report.append(f"  - {row.get('ip', '')} -> {row['url']}")
+            report.append("")
+
     if len(report) == 1:
         return "✅ No significant events found in log."
 
@@ -357,50 +444,43 @@ def analyze_json_log(json_data):
             report.append(line)
         report.append("")
 
-    # 9. Files involved
-    if 'file' in df.columns or 'filename' in df.columns:
-        files = pd.concat([
-            df['file'] if 'file' in df.columns else pd.Series(dtype=str),
-            df['filename'] if 'filename' in df.columns else pd.Series(dtype=str)
-        ])
-        file_counts = files.value_counts()
-        if not file_counts.empty:
-            report.append("📄 Files Involved:")
-            for fname, count in file_counts.items():
-                report.append(f"  - {fname}: {count} times")
+    # 9. Rare events (occurred only once)
+    if 'event' in df.columns:
+        rare_events = df['event'].value_counts()
+        rare_events = rare_events[rare_events == 1]
+        if not rare_events.empty:
+            report.append("🦄 Rare Events (occurred only once):")
+            for event in rare_events.index:
+                report.append(f"  - {event}")
             report.append("")
 
-    # 10. Payloads detected
-    if 'payload' in df.columns:
-        payloads = df['payload'].dropna().unique()
-        if len(payloads):
-            report.append("💉 Payloads Detected:")
-            for payload in payloads:
-                report.append(f"  - {payload}")
+    # 10. Suspiciously short user agents
+    if 'user_agent' in df.columns:
+        short_ua = df[df['user_agent'].astype(str).str.len() < 10]
+        if not short_ua.empty:
+            report.append("🤖 Suspiciously Short User Agents:")
+            for _, row in short_ua.iterrows():
+                report.append(f"  - {row.get('user', '')} UA: {row['user_agent']}")
             report.append("")
 
-    # 11. Statuses
-    if 'status' in df.columns:
-        status_counts = df['status'].value_counts()
-        report.append("📊 Status Codes:")
-        for status, count in status_counts.items():
-            report.append(f"  - {status}: {count}")
-        report.append("")
-
-    # 12. Success/failure of reports
-    if 'status' in df.columns and 'event' in df.columns:
-        report_events = df[df['event'].str.contains('Report', na=False)]
-        if not report_events.empty:
-            report.append("📑 Report Generation Events:")
-            for _, row in report_events.iterrows():
-                ts = row.get('timestamp', '')
-                fname = row.get('filename', row.get('file', ''))
-                status = row.get('status', '')
-                msg = row.get('message', '')
-                report.append(f"  - [{ts}] {fname} ({status}): {msg}")
+    # 11. Events with non-ASCII in event/message (possible obfuscation)
+    if 'event' in df.columns:
+        non_ascii_event = df[df['event'].astype(str).apply(lambda x: any(ord(c) > 127 for c in x))]
+        if not non_ascii_event.empty:
+            report.append("🕵️ Events with Non-ASCII Characters (possible obfuscation):")
+            for _, row in non_ascii_event.iterrows():
+                report.append(f"  - {row.get('user', '')} -> {row['event']}")
             report.append("")
 
-    # 13. Anything else you want to add...
+    # Add repeated requests check
+    if 'ip' in df.columns and 'url' in df.columns:
+        repeated = df.groupby(['ip', 'url']).size().reset_index(name='count')
+        repeated = repeated[repeated['count'] > 10]
+        if not repeated.empty:
+            report.append("🔁 Repeated Requests to Same Endpoint (Possible Scanning):")
+            for _, row in repeated.iterrows():
+                report.append(f"  - {row['ip']} -> {row['url']} ({row['count']} times)")
+            report.append("")
 
     if len(report) == 1:
         return "✅ No significant events found in JSON log."

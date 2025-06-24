@@ -4,8 +4,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
   <meta charset="UTF-8">
   <title>🔎DeepLog — Log Analyzer</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
   <nav class="cyber-navbar">
@@ -56,126 +55,30 @@
     <div class="progress-label" id="progressLabel">Uploading...</div>
   </div>
   <audio id="bgMusic" src="{{ url_for('static', filename='background.mp3') }}" autoplay loop></audio>
-    <button id="musicBtn" style="position:fixed;left:30px;bottom:30px;z-index:150;background:rgba(30,40,60,0.81);color:#fff;font-size:17px;padding:12px 23px;border-radius:16px;border:none;box-shadow:0 3px 16px #1e1e2f44;font-weight:700;cursor:pointer;letter-spacing:1px;">🔊 Music On</button>
-    <script>
-    const bgMusic = document.getElementById('bgMusic');
-    const musicBtn = document.getElementById('musicBtn');
-    let isPlaying = true;
-    musicBtn.onclick = function() {
-        if(isPlaying) {
-            bgMusic.pause();
-            musicBtn.textContent = "🔇 Music Off";
-        } else {
-            bgMusic.play();
-            musicBtn.textContent = "🔊 Music On";
-        }
-        isPlaying = !isPlaying;
-    };
-    window.addEventListener('click', function playAudioOnce() {
-        bgMusic.play();
-        window.removeEventListener('click', playAudioOnce);
-    });
-    </script>
   <!-- DONATION BUTTON + POPUP -->
-  <button class="donate-btn" id="donateBtn">💎 Donate</button>
+  <div class="footer-bar">
+    <button id="musicBtn" class="music-btn">🔊 Music On</button>
+    <span class="copyright-footer">&copy; DeepLog 2025</span>
+    <button class="donate-btn" id="donateBtn">💎 Donate</button>
+  </div>
+
   <div class="donate-modal" id="donateModal">
     <div class="donate-modal-content">
       <span class="donate-close" id="donateClose">&times;</span>
       <h2 style="margin-bottom:18px;">Support DeepLog</h2>
       <div style="margin-bottom: 8px; font-size:15.5px;">USDT TRC20:</div>
-      <div class="donate-wallet">TTttSQ274h6bEAbtS2mbLNQVg3K3HiSU6y <button class="copy-btn" data-copy="TTttSQ274h6bEAbtS2mbLNQVg3K3HiSU6y">Copy</button></div>
+      <div class="donate-wallet">
+        TTttSQ274h6bEAbtS2mbLNQVg3K3HiSU6y
+        <button class="copy-btn" data-copy="TTttSQ274h6bEAbtS2mbLNQVg3K3HiSU6y">Copy</button>
+      </div>
       <div style="margin-top: 14px; margin-bottom: 8px; font-size:15.5px;">BTC:</div>
-      <div class="donate-wallet">1AbHQdVVLzAGQv153UnJmvKsmWdX6sEfjk <button class="copy-btn" data-copy="1AbHQdVVLzAGQv153UnJmvKsmWdX6sEfjk">Copy</button></div>
+      <div class="donate-wallet">
+        1AbHQdVVLzAGQv153UnJmvKsmWdX6sEfjk
+        <button class="copy-btn" data-copy="1AbHQdVVLzAGQv153UnJmvKsmWdX6sEfjk">Copy</button>
+      </div>
       <div id="donateCopyMsg" class="copy-msg"></div>
     </div>
   </div>
-
-  <script>
-  // Progress-bar logic (твоя старая логика)
-  const form = document.getElementById('uploadForm');
-  const progressBar = document.getElementById('progressBar');
-  const progressContainer = document.getElementById('progressContainer');
-  const progressLabel = document.getElementById('progressLabel');
-
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const fileInput = form.querySelector('input[type="file"]');
-    if (!fileInput.files.length) return;
-    const fileSize = fileInput.files[0].size;
-    const minUploadDuration = 3000;
-    const msPerMB = 500;
-    const fileSizeMB = fileSize / (1024 * 1024);
-    const uploadDuration = minUploadDuration + fileSizeMB * msPerMB;
-    const analyzeDuration = 2000;
-
-    progressContainer.style.display = 'block';
-    progressLabel.style.display = 'block';
-    progressBar.style.width = '0%';
-    progressBar.textContent = '0%';
-    progressLabel.textContent = 'Uploading...';
-
-    const formData = new FormData(form);
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', form.action, true);
-    let percent = 0;
-    const uploadSteps = 99;
-    const uploadStepTime = uploadDuration / uploadSteps;
-    const uploadInterval = setInterval(() => {
-      if (percent < 99) {
-        percent += 1;
-        progressBar.style.width = percent + '%';
-        progressBar.textContent = percent + '%';
-      }
-    }, uploadStepTime);
-
-    xhr.onload = function() {
-      clearInterval(uploadInterval);
-      progressLabel.textContent = 'Analyzing...';
-      let analyzePercent = percent;
-      const analyzeSteps = 100 - analyzePercent;
-      const analyzeStepTime = analyzeDuration / analyzeSteps;
-      const analyzeInterval = setInterval(() => {
-        analyzePercent += 1;
-        progressBar.style.width = analyzePercent + '%';
-        progressBar.textContent = analyzePercent + '%';
-        if (analyzePercent >= 100) {
-          clearInterval(analyzeInterval);
-          progressLabel.textContent = 'Completed!';
-          setTimeout(() => {
-            document.open();
-            document.write(xhr.responseText);
-            document.close();
-          }, 800);
-        }
-      }, analyzeStepTime);
-    };
-    xhr.onerror = function() {
-      clearInterval(uploadInterval);
-      progressLabel.textContent = 'Upload failed.';
-    };
-    xhr.send(formData);
-  });
-
-  // Donation popup logic
-  const donateBtn = document.getElementById('donateBtn');
-  const donateModal = document.getElementById('donateModal');
-  const donateClose = document.getElementById('donateClose');
-  donateBtn.onclick = () => donateModal.style.display = 'flex';
-  donateClose.onclick = () => donateModal.style.display = 'none';
-  window.onclick = (e) => {
-    if (e.target == donateModal) donateModal.style.display = 'none';
-  };
-  // Copy button logic
-  document.querySelectorAll('.copy-btn').forEach(btn => {
-    btn.onclick = function() {
-      const value = btn.getAttribute('data-copy');
-      navigator.clipboard.writeText(value);
-      const msg = document.getElementById('donateCopyMsg');
-      msg.innerText = "Copied!";
-      msg.style.opacity = "1";
-      setTimeout(()=>{ msg.style.opacity = "0"; }, 1300);
-    }
-  });
-  </script>
+  <script src="{{ url_for('static', filename='main.js') }}"></script>
 </body>
 </html>

@@ -36,14 +36,9 @@
   - [2025-06-23 18:42:10+00:00] ReportGenerated (user: nan): Report generated and saved.
   - [2025-06-23 18:43:02+00:00] UploadFailed (user: nan): Failed to upload report to cloud storage. Check connection.
 
-📄 Files Involved:
-  - report_testsite_23062025.pdf: 2 times
-
-💉 Payloads Detected:
-  - ' OR '1'='1
-
-📊 Status Codes:
-  - Success: 1
-
-📑 Report Generation Events:
-  - [2025-06-23 18:42:10+00:00] report_testsite_23062025.pdf (Success): Report generated and saved.
+🦄 Rare Events (occurred only once):
+  - UserLogin
+  - TargetScan
+  - PotentialVulnFound
+  - ReportGenerated
+  - UploadFailed

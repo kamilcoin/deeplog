@@ -1,0 +1,106 @@
+body {
+    background: #181c20;
+    color: #f3f6fa;
+    font-family: 'Inter', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #23272e;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25);
+    padding: 36px 32px 32px 32px;
+}
+
+h1 {
+    font-weight: 800;
+    font-size: 2.3rem;
+    margin-bottom: 18px;
+    letter-spacing: -1px;
+    color: #7dd3fc;
+    text-shadow: 0 2px 12px #0ea5e933;
+}
+
+.download-btn {
+    display: inline-block;
+    background: linear-gradient(90deg, #0ea5e9 0%, #38bdf8 100%);
+    color: #fff;
+    font-weight: 700;
+    padding: 12px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 8px #0ea5e955;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.download-btn:hover {
+    background: linear-gradient(90deg, #38bdf8 0%, #0ea5e9 100%);
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 4px 16px #38bdf855;
+}
+
+pre {
+    background: #15181c;
+    color: #f3f6fa;
+    border-radius: 10px;
+    padding: 24px;
+    font-size: 1.08rem;
+    line-height: 1.7;
+    overflow-x: auto;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px #0ea5e933;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+a {
+    color: #7dd3fc;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: #38bdf8;
+    text-decoration: underline;
+}
+
+.footer {
+    margin-top: 32px;
+    text-align: center;
+    color: #64748b;
+    font-size: 0.98rem;
+    opacity: 0.7;
+}
+
+.bottom-actions {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 16px 4px;
+    }
+
+    pre {
+        padding: 12px;
+        font-size: 0.98rem;
+    }
+
+    h1 {
+        font-size: 1.3rem;
+    }
+
+    .bottom-actions {
+        gap: 8px;
+    }
+}
