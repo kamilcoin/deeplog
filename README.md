@@ -11,7 +11,7 @@
 
 ## 🖼️ Preview
 
-<img src="https://raw.githubusercontent.com/kamilcoin/deeplog/main/assets/screenshot.png" alt="DeepLog UI Screenshot" width="100%" />
+<img src="https://raw.githubusercontent.com/kamilcoin/deeplog/main/assets/image.png" alt="DeepLog UI Screenshot" width="100%" />
 
 ---
 
