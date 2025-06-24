@@ -25,8 +25,6 @@ body {
     }
 }
 
-
-
 .footer-bar {
     width: 100%;
     position: fixed;
@@ -37,7 +35,6 @@ body {
     align-items: center;
     gap: 12px;
     padding: 0 0 10px 0;
-    /* Remove side padding */
     background: none;
     z-index: 200;
     box-shadow: none;
@@ -56,7 +53,6 @@ body {
     cursor: pointer;
     letter-spacing: 1px;
     margin-left: 18px;
-    /* Add gap from left edge */
     margin-right: 0;
 }
 
@@ -75,7 +71,6 @@ body {
     letter-spacing: 1px;
     outline: none;
     margin-right: 18px;
-    /* Add gap from right edge */
     margin-left: 0;
 }
 
@@ -245,14 +240,12 @@ a:hover {
     }
 }
 
-/* Remove all loading bar related styles */
 .progress-container,
 .progress-bar,
 .progress-label {
     display: none !important;
 }
 
-/* Download Button - Premium Style */
 .download-btn {
     display: inline-flex;
     align-items: center;
@@ -316,8 +309,6 @@ a:hover {
         transform: translateY(0);
     }
 }
-
-
 
 .donate-btn:hover {
     background: linear-gradient(90deg, #1e40af 0%, #3b82f6 100%);
@@ -427,7 +418,6 @@ a:hover {
     font-weight: 700;
 }
 
-/* Cyber Navbar */
 .cyber-navbar {
     width: 100vw;
     background: none;
@@ -436,9 +426,7 @@ a:hover {
     justify-content: flex-start;
     align-items: center;
     padding: 0 0 10px 18px;
-    /* Added 10px bottom padding */
     height: 100px;
-    /* Slightly increased height for balance */
     position: fixed;
     top: 0;
     left: 0;
@@ -466,9 +454,6 @@ a:hover {
     transform: scale(1.09) rotate(-3deg);
     box-shadow: 0 0 22px #00ffe7cc;
 }
-
-/* Remove nav-right and cyber-btn styles */
-
 
 .flash-messages {
     width: 100%;
@@ -520,7 +505,6 @@ a:hover {
     left: 0;
     right: 0;
     bottom: 10px;
-    /* Not flush with bottom, adjust as needed */
     color: #60a5fa;
     font-weight: 700;
     margin: 0 auto;

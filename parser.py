@@ -7,7 +7,6 @@ def parse_log(filepath):
         with open(filepath, 'r', encoding='utf-8') as f:
             data = json.load(f)
         df = pd.DataFrame(data)
-        # Parse timestamp if present
         if 'timestamp' in df.columns:
             df['timestamp'] = pd.to_datetime(df['timestamp'], errors='coerce')
         return df

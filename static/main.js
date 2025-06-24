@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Music button logic
     const bgMusic = document.getElementById('bgMusic');
     const musicBtn = document.getElementById('musicBtn');
     let isPlaying = true;
@@ -20,7 +19,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Simple upload (no loading bar)
     const form = document.getElementById('uploadForm');
     const uploadingMsg = document.getElementById('uploadingMsg');
     if (form && uploadingMsg) {
@@ -41,7 +39,6 @@ document.addEventListener('DOMContentLoaded', function () {
         };
     }
 
-    // Copy button logic
     document.querySelectorAll('.copy-btn').forEach(btn => {
         btn.onclick = function () {
             const value = btn.getAttribute('data-copy');
