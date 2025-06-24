@@ -59,3 +59,4 @@ dmypy.json
 
 # VS Code
 .vscode/
+requirements.txt

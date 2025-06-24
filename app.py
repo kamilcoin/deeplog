@@ -5,8 +5,9 @@ from analyzer import analyze_log, analyze_json_log
 import json
 from flask import render_template_string
 
-UPLOAD_FOLDER = 'uploads'
-REPORT_FOLDER = 'reports'
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+UPLOAD_FOLDER = os.path.join(BASE_DIR, 'uploads')
+REPORT_FOLDER = os.path.join(BASE_DIR, 'reports')
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -92,7 +93,7 @@ def upload():
         download=False
     )
 
-    with open(os.path.join('static', 'report.css'), 'r', encoding='utf-8') as f:
+    with open(os.path.join(BASE_DIR, 'static', 'report.css'), 'r', encoding='utf-8') as f:
         css_content = f.read()
     font_link = '<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">'
     rendered_html_download = render_template(
