@@ -1,9 +1,8 @@
 # 🔍 DeepLog — Server Log Analyzer
-
-[![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python)](https://www.python.org/)
-[![Flask](https://img.shields.io/badge/Flask-Web_App-black?logo=flask)](https://flask.palletsprojects.com/)
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Stars](https://img.shields.io/github/stars/kamilcoin/deeplog?style=for-the-badge&label=Stars&logo=github)](https://github.com/kamilcoin/deeplog/stargazers)
+[![Python](https://img.shields.io/badge/Python-3.10+-blue?style=for-the-badge&logo=python)](https://www.python.org/)
+[![Flask](https://img.shields.io/badge/Flask-Web_App-black?style=for-the-badge&logo=flask)](https://flask.palletsprojects.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/kamilcoin/deeplog?style=for-the-badge&label=Stars&logo=github)](https://github.com/kamilcoin/deeplog/stargazers)
 
 
 > **Upload logs. Detect anomalies. Stay secure.**  
